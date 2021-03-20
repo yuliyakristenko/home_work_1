@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Buttons</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<script type="text/javascript">
+		function selectFirstItem() {
+			var items = document.getElementsByTagName("li");
+			items[0].style.color = "blue";
+		};
+
+		function selectLastItem() {
+			var items = document.getElementsByTagName("li");
+			items[items.length-1].style.color = "orange";
+		};
+
+		function selectNextItem() {
+			var items = document.getElementsByTagName("li");
+
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].getAttribute("id")){
+					var index = i;
+
+					items[index].removeAttribute("id");
+					items[index].style.color = "black";
+
+					if ((i + 1) >= items.length){
+						index = 0;
+					}
+					else {
+						index++;
+					}
+					items[index].setAttribute("id", "selected");
+					items[index].style.color = "green";
+					break;
+				};
+			};
+		};
+
+		function selectPreviousItem(){
+			var items = document.getElementsByTagName("li");
+
+			for (var i = 0; i < items.length; i++) {
+				if (items[i].getAttribute("id")){
+					var index = i;
+
+					items[index].removeAttribute("id");
+					items[index].style.color = "black";
+
+					if ((i - 1) < 0){
+						index = items.length-1;
+					}
+					else {
+						index--;
+					}
+					items[index].setAttribute("id", "selected");
+					items[index].style.color = "yellow";
+					break;
+				};
+			};
+		};
+
+		function addItem(form) {
+            var appendItem = document.createElement("li");
+            appendItem.innerHTML = "Pozition x";
+            document.getElementById("homeUl").appendChild(appendItem);
+		};
+
+		function deliteItem() {
+			var items = document.getElementById("homeUl");
+				var pozitionX = items.lastChild;
+				items.removeChild(pozitionX);			
+		};
+
+		function addStart(form) {
+			var items = document.getElementById("homeUl");
+			var heading = document.createElement("li");
+			heading.innerHTML ="Pozition A";
+			items.insertBefore(heading, selected);
+		};
+	</script>
+
+	<ul id="homeUl">
+		<li id="selected">Pozition 1</li>
+		<li>Pozition 2</li>
+		<li>Pozition 3</li>
+		<li>Pozition 4</li>
+		<li>Pozition 5</li>
+		<li id="lastItem">Pozition 6</li>
+	</ul>
+
+	<form>
+		<input type="button" name="" value="Выбрать первый элемент" onclick="selectFirstItem(this.form)"><br />
+		<input type="button" name="" value="Выбрать последний элемент" onclick="selectLastItem(this.form)"><br />
+		<input type="button" name="" value="Выбрать следующий элемент" onclick="selectNextItem(this.form)"><br />
+		<input type="button" name="" value="Выбрать предыдущий элемент" onclick="selectPreviousItem(this.form)"><br />
+		<input type="button" name="" value="Добавить элемент" onclick="addItem(this.form)"><br />
+		<input type="button" name="" value="Удалить элемент" onclick="deliteItem(this.form)"><br />
+		<input type="button" name="" value="Добавить в начало" onclick="addStart(this.form)"><br />
+	</form>
+</body>
+</html>
